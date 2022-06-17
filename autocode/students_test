@@ -66,7 +66,11 @@ func prepareTestData() People {
 		"Filipov",
 		time.Date(2007, time.January, 5, 5, 5, 5, 0, timeStamp),
 	})
-
+	peopleCollection = append(peopleCollection, Person{
+		"Semen",
+		"Filipov",
+		time.Date(2007, time.January, 5, 5, 5, 5, 0, timeStamp),
+	})
 	return peopleCollection
 }
 
@@ -76,7 +80,7 @@ func prepareTestData() People {
 
 func TestLenFunctionIsNotEmpty(t *testing.T) {
 	var peoples = prepareTestData()
-	var expected = 6
+	var expected = 7
 	var actual = peoples.Len()
 	if expected != actual {
 		t.Errorf(intErrorFormat, expected, actual)
@@ -100,10 +104,14 @@ func TestLessFunction(t *testing.T) {
 		J        int
 		Expected bool
 	}{
-		{I: 1, J: 2, Expected: true},
-		{I: 0, J: 3, Expected: false},
-		{I: 2, J: 3, Expected: false},
-		{I: 4, J: 5, Expected: false},
+		{I: 1, J: 2, Expected: true},  //i.birthdate < j.birthdate
+		{I: 1, J: 0, Expected: true},  //i.birthdate > j.birthdate
+		{I: 4, J: 3, Expected: false}, // i.firstname > j.firstname
+		{I: 3, J: 4, Expected: true},  // i.firstname < j.firstname
+		{I: 4, J: 5, Expected: false}, // i.lastname < j.lastname
+		{I: 5, J: 4, Expected: true},  // i.lastname > j.lastname
+		{I: 5, J: 6, Expected: false}, //i.params = j.params
+		{I: 5, J: 5, Expected: false}, //i.params = i.params
 	}
 	var peoples = prepareTestData()
 	for _, v := range tData {
@@ -155,6 +163,7 @@ func TestIncorrectMatrixCreationFunction(t *testing.T) {
 		{InitialString: "", ErrMsg: invalidSyntaxError},
 		{InitialString: " ", ErrMsg: invalidSyntaxError},
 		{InitialString: "1\n ", ErrMsg: invalidSyntaxError},
+		{InitialString: "1234567890\n", ErrMsg: invalidSyntaxError},
 		{InitialString: "1 1 1\n1 1\n1 1 1", ErrMsg: "Rows need to be the same length"},
 		{InitialString: "1 1 x\n1 1 y\n1 1 z", ErrMsg: "strconv.Atoi: parsing \"x\": invalid syntax"},
 	}
