@@ -188,7 +188,7 @@ func TestValidMatrixCreationFunction(t *testing.T) {
 }
 
 // Matrix rows tests
-func TestMatrix_RowsFunction(t *testing.T) {
+func TestMatrixRowsFunction(t *testing.T) {
 	tData := []struct {
 		InitialString string
 		ExpectedRows  [][]int
@@ -231,7 +231,7 @@ func TestMatrix_RowsFunction(t *testing.T) {
 
 // Matrix cols tests
 
-func TestMatrix_ColsFunction(t *testing.T) {
+func TestMatrixColsFunction(t *testing.T) {
 	tData := []struct {
 		InitialString string
 		ExpectedCols  [][]int
@@ -273,7 +273,7 @@ func TestMatrix_ColsFunction(t *testing.T) {
 }
 
 // Matrix set tests
-func TestNegativeValuesMatrix_SetFunction(t *testing.T) {
+func TestNegativeValuesMatrixSetFunction(t *testing.T) {
 	tData := []struct {
 		InitialString string
 		Row           int
@@ -298,7 +298,7 @@ func TestNegativeValuesMatrix_SetFunction(t *testing.T) {
 	}
 }
 
-func TestValidValuesMatrix_SetFunction(t *testing.T) {
+func TestValidValuesMatrixSetFunction(t *testing.T) {
 	tData := []struct {
 		InitialString string
 		Row           int
