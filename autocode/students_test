@@ -12,6 +12,9 @@ var (
 	intErrorFormat     = "Expected: %d, got %d"
 	complexErrorFormat = "Expected: %v, got %v"
 	invalidSyntaxError = "strconv.Atoi: parsing \"\": invalid syntax"
+
+	simpleMatrixString               = "1 2 3\n4 5 6\n7 8 9"
+	matrixWithNegativeElementsString = "-1 2 3\n4 -5 6\n7 8 -9"
 )
 
 // DO NOT EDIT THIS FUNCTION
@@ -192,7 +195,7 @@ func TestMatrix_RowsFunction(t *testing.T) {
 		ErrMsg        error
 	}{
 		{
-			InitialString: "1 2 3\n4 5 6\n7 8 9",
+			InitialString: simpleMatrixString,
 			ExpectedRows: [][]int{
 				{1, 2, 3},
 				{4, 5, 6},
@@ -206,7 +209,7 @@ func TestMatrix_RowsFunction(t *testing.T) {
 			ErrMsg:        nil,
 		},
 		{
-			InitialString: "-1 2 3\n4 -5 6\n7 8 -9",
+			InitialString: matrixWithNegativeElementsString,
 			ExpectedRows: [][]int{
 				{-1, 2, 3},
 				{4, -5, 6},
@@ -235,7 +238,7 @@ func TestMatrix_ColsFunction(t *testing.T) {
 		ErrMsg        error
 	}{
 		{
-			InitialString: "1 2 3\n4 5 6\n7 8 9",
+			InitialString: simpleMatrixString,
 			ExpectedCols: [][]int{
 				{1, 4, 7},
 				{2, 5, 8},
@@ -249,7 +252,7 @@ func TestMatrix_ColsFunction(t *testing.T) {
 			ErrMsg:        nil,
 		},
 		{
-			InitialString: "-1 2 3\n4 -5 6\n7 8 -9",
+			InitialString: matrixWithNegativeElementsString,
 			ExpectedCols: [][]int{
 				{-1, 4, 7},
 				{2, -5, 8},
@@ -278,12 +281,12 @@ func TestNegativeValuesMatrix_SetFunction(t *testing.T) {
 		Value         int
 		ExpInSet      bool
 	}{
-		{InitialString: "1 2 3\n4 5 6\n7 8 9", Row: -1, Col: 1, Value: 1, ExpInSet: false},
-		{InitialString: "1 2 3\n4 5 6\n7 8 9", Row: 4, Col: 1, Value: 1, ExpInSet: false},
-		{InitialString: "1 2 3\n4 5 6\n7 8 9", Row: 3, Col: 1, Value: 1, ExpInSet: false},
-		{InitialString: "1 2 3\n4 5 6\n7 8 9", Row: 1, Col: -1, Value: 1, ExpInSet: false},
-		{InitialString: "1 2 3\n4 5 6\n7 8 9", Row: 1, Col: 4, Value: 1, ExpInSet: false},
-		{InitialString: "1 2 3\n4 5 6\n7 8 9", Row: 1, Col: 3, Value: 1, ExpInSet: false},
+		{InitialString: simpleMatrixString, Row: -1, Col: 1, Value: 1, ExpInSet: false},
+		{InitialString: simpleMatrixString, Row: 4, Col: 1, Value: 1, ExpInSet: false},
+		{InitialString: simpleMatrixString, Row: 3, Col: 1, Value: 1, ExpInSet: false},
+		{InitialString: simpleMatrixString, Row: 1, Col: -1, Value: 1, ExpInSet: false},
+		{InitialString: simpleMatrixString, Row: 1, Col: 4, Value: 1, ExpInSet: false},
+		{InitialString: simpleMatrixString, Row: 1, Col: 3, Value: 1, ExpInSet: false},
 	}
 	for _, v := range tData {
 		matrix, _ := New(v.InitialString)
@@ -304,9 +307,9 @@ func TestValidValuesMatrix_SetFunction(t *testing.T) {
 		ExpInSet      bool
 		ValueIndex    int
 	}{
-		{InitialString: "1 2 3\n4 5 6\n7 8 9", Row: 0, Col: 0, Value: 100, ExpInSet: true, ValueIndex: 0},
-		{InitialString: "1 2 3\n4 5 6\n7 8 9", Row: 1, Col: 1, Value: 75, ExpInSet: true, ValueIndex: 4},
-		{InitialString: "-1 2 3\n4 -5 6\n7 8 -9", Row: 1, Col: 1, Value: -100, ExpInSet: true, ValueIndex: 4},
+		{InitialString: simpleMatrixString, Row: 0, Col: 0, Value: 100, ExpInSet: true, ValueIndex: 0},
+		{InitialString: simpleMatrixString, Row: 1, Col: 1, Value: 75, ExpInSet: true, ValueIndex: 4},
+		{InitialString: matrixWithNegativeElementsString, Row: 1, Col: 1, Value: -100, ExpInSet: true, ValueIndex: 4},
 	}
 	for _, v := range tData {
 		matrix, _ := New(v.InitialString)
